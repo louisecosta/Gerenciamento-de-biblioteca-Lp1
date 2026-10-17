@@ -15,3 +15,11 @@ const std::string& Usuario::getNome() const {
 const std::list<std::string>& Usuario::getEmprestados() const {
     return emprestados;
 }
+
+bool Usuario::podeEmprestar() const {
+    return emprestados.size() < 3;
+}
+
+void Usuario::adicionarEmprestimo(const std::string& codigoBarras) {
+    emprestados.push_back(codigoBarras);
+}

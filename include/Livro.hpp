@@ -16,6 +16,7 @@ public:
     const std::string& getCpfMutuario() const;
 
     bool estaDisponivel() const;
+    void emprestarPara(const std::string& cpf);
 
 private:
     std::string codigoBarras;

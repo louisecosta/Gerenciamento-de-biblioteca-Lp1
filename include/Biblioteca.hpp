@@ -17,6 +17,12 @@ public:
     std::string cadastrarUsuario(const std::string& cpf,
                                  const std::string& nome);
 
+    std::string emprestar(const std::string& cpf,
+                          const std::string& codigoBarras);
+
+    const Livro* buscarLivro(const std::string& codigoBarras) const;
+    const Usuario* buscarUsuario(const std::string& cpf) const;
+
 private:
     std::map<std::string, Livro> livros;
     std::map<std::string, Usuario> usuarios;

@@ -67,10 +67,24 @@ static void opcaoCadastrarUsuario(Biblioteca& biblioteca) {
     std::cout << biblioteca.cadastrarUsuario(cpf, nome) << std::endl;
 }
 
+static void opcaoRegistrarEmprestimo(Biblioteca& biblioteca) {
+    std::string cpf;
+    std::string codigoBarras;
+
+    std::cout << "Digite o CPF do usuario: ";
+    std::cin >> cpf;
+
+    std::cout << "Codigo de barras do livro: ";
+    std::cin >> codigoBarras;
+
+    std::cout << biblioteca.emprestar(cpf, codigoBarras) << std::endl;
+}
+
 void executar(Biblioteca& biblioteca) {
     while (true) {
         std::cout << "1 - Cadastrar livro" << std::endl;
         std::cout << "2 - Cadastrar usuario" << std::endl;
+        std::cout << "3 - Registrar emprestimo" << std::endl;
         std::cout << "0 - Sair" << std::endl;
         std::cout << "Escolha uma opcao: ";
 
@@ -96,6 +110,11 @@ void executar(Biblioteca& biblioteca) {
             }
         } else if (opcao == 2) {
             opcaoCadastrarUsuario(biblioteca);
+            if (!perguntarMaisAcao()) {
+                return;
+            }
+        } else if (opcao == 3) {
+            opcaoRegistrarEmprestimo(biblioteca);
             if (!perguntarMaisAcao()) {
                 return;
             }

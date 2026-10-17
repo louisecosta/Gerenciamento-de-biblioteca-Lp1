@@ -12,6 +12,9 @@ public:
     const std::string& getNome() const;
     const std::list<std::string>& getEmprestados() const;
 
+    bool podeEmprestar() const;
+    void adicionarEmprestimo(const std::string& codigoBarras);
+
 private:
     std::string cpf;
     std::string nome;

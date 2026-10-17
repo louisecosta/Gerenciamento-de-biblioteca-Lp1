@@ -33,3 +33,7 @@ const std::string& Livro::getCpfMutuario() const {
 bool Livro::estaDisponivel() const {
     return cpfMutuario.empty();
 }
+
+void Livro::emprestarPara(const std::string& cpf) {
+    cpfMutuario = cpf;
+}

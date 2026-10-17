@@ -1,5 +1,6 @@
 #include "Biblioteca.hpp"
 
+#include <list>
 #include <utility>
 
 static bool todosDigitos(const std::string& texto) {
@@ -70,4 +71,61 @@ std::string Biblioteca::cadastrarUsuario(const std::string& cpf,
     Usuario novo(cpf, nome);
     usuarios.insert(std::make_pair(cpf, novo));
     return "Usuario cadastrado com sucesso!";
+}
+
+std::string Biblioteca::emprestar(const std::string& cpf,
+                                  const std::string& codigoBarras) {
+    std::map<std::string, Usuario>::iterator itUsuario = usuarios.find(cpf);
+    if (itUsuario == usuarios.end()) {
+        return "Usuario nao encontrado";
+    }
+
+    if (!itUsuario->second.podeEmprestar()) {
+        return "Limite de empretimos atingido";
+    }
+
+    std::map<std::string, Livro>::iterator itLivro = livros.find(codigoBarras);
+    if (itLivro == livros.end()) {
+        return "Livro fora do acervo";
+    }
+
+    if (!itLivro->second.estaDisponivel()) {
+        return "Livro indisponivel";
+    }
+
+    const std::list<std::string>& emprestados =
+        itUsuario->second.getEmprestados();
+    std::list<std::string>::const_iterator it = emprestados.begin();
+    while (it != emprestados.end()) {
+        std::map<std::string, Livro>::const_iterator itEmprestado =
+            livros.find(*it);
+        if (itEmprestado != livros.end()
+            && itEmprestado->second.getNumeroChamada()
+                   == itLivro->second.getNumeroChamada()) {
+            return "Usuario ja possui este livro";
+        }
+        ++it;
+    }
+
+    itLivro->second.emprestarPara(cpf);
+    itUsuario->second.adicionarEmprestimo(codigoBarras);
+
+    return "OK: Emprestimo realizado. " + itLivro->second.getTitulo()
+           + " agora esta com " + itUsuario->second.getNome() + ".";
+}
+
+const Livro* Biblioteca::buscarLivro(const std::string& codigoBarras) const {
+    std::map<std::string, Livro>::const_iterator it = livros.find(codigoBarras);
+    if (it == livros.end()) {
+        return nullptr;
+    }
+    return &it->second;
+}
+
+const Usuario* Biblioteca::buscarUsuario(const std::string& cpf) const {
+    std::map<std::string, Usuario>::const_iterator it = usuarios.find(cpf);
+    if (it == usuarios.end()) {
+        return nullptr;
+    }
+    return &it->second;
 }

@@ -14,6 +14,7 @@ public:
 
     bool podeEmprestar() const;
     void adicionarEmprestimo(const std::string& codigoBarras);
+    void removerEmprestimo(const std::string& codigoBarras);
 
 private:
     std::string cpf;

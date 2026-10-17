@@ -23,3 +23,7 @@ bool Usuario::podeEmprestar() const {
 void Usuario::adicionarEmprestimo(const std::string& codigoBarras) {
     emprestados.push_back(codigoBarras);
 }
+
+void Usuario::removerEmprestimo(const std::string& codigoBarras) {
+    emprestados.remove(codigoBarras);
+}

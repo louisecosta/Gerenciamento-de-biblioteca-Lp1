@@ -37,3 +37,7 @@ bool Livro::estaDisponivel() const {
 void Livro::emprestarPara(const std::string& cpf) {
     cpfMutuario = cpf;
 }
+
+void Livro::devolver() {
+    cpfMutuario = "";
+}

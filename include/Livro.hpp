@@ -17,6 +17,7 @@ public:
 
     bool estaDisponivel() const;
     void emprestarPara(const std::string& cpf);
+    void devolver();
 
 private:
     std::string codigoBarras;

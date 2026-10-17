@@ -114,6 +114,24 @@ std::string Biblioteca::emprestar(const std::string& cpf,
            + " agora esta com " + itUsuario->second.getNome() + ".";
 }
 
+std::string Biblioteca::devolver(const std::string& codigoBarras) {
+    std::map<std::string, Livro>::iterator itLivro = livros.find(codigoBarras);
+    if (itLivro == livros.end()) {
+        return "Devolucao invalida";
+    }
+
+    if (itLivro->second.estaDisponivel()) {
+        return "Devolucao invalida";
+    }
+
+    std::map<std::string, Usuario>::iterator itUsuario =
+        usuarios.find(itLivro->second.getCpfMutuario());
+    itUsuario->second.removerEmprestimo(codigoBarras);
+
+    itLivro->second.devolver();
+    return "Livro devolvido com sucesso!";
+}
+
 const Livro* Biblioteca::buscarLivro(const std::string& codigoBarras) const {
     std::map<std::string, Livro>::const_iterator it = livros.find(codigoBarras);
     if (it == livros.end()) {

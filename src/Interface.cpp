@@ -80,11 +80,21 @@ static void opcaoRegistrarEmprestimo(Biblioteca& biblioteca) {
     std::cout << biblioteca.emprestar(cpf, codigoBarras) << std::endl;
 }
 
+static void opcaoRegistrarDevolucao(Biblioteca& biblioteca) {
+    std::string codigoBarras;
+
+    std::cout << "Codigo de barras do livro: ";
+    std::cin >> codigoBarras;
+
+    std::cout << biblioteca.devolver(codigoBarras) << std::endl;
+}
+
 void executar(Biblioteca& biblioteca) {
     while (true) {
         std::cout << "1 - Cadastrar livro" << std::endl;
         std::cout << "2 - Cadastrar usuario" << std::endl;
         std::cout << "3 - Registrar emprestimo" << std::endl;
+        std::cout << "4 - Registrar devolucao" << std::endl;
         std::cout << "0 - Sair" << std::endl;
         std::cout << "Escolha uma opcao: ";
 
@@ -115,6 +125,11 @@ void executar(Biblioteca& biblioteca) {
             }
         } else if (opcao == 3) {
             opcaoRegistrarEmprestimo(biblioteca);
+            if (!perguntarMaisAcao()) {
+                return;
+            }
+        } else if (opcao == 4) {
+            opcaoRegistrarDevolucao(biblioteca);
             if (!perguntarMaisAcao()) {
                 return;
             }

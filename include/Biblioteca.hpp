@@ -20,6 +20,8 @@ public:
     std::string emprestar(const std::string& cpf,
                           const std::string& codigoBarras);
 
+    std::string devolver(const std::string& codigoBarras);
+
     const Livro* buscarLivro(const std::string& codigoBarras) const;
     const Usuario* buscarUsuario(const std::string& cpf) const;
 

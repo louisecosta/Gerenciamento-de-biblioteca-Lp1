@@ -5,6 +5,7 @@
 #include <string>
 
 #include "Livro.hpp"
+#include "Usuario.hpp"
 
 class Biblioteca {
 public:
@@ -13,8 +14,12 @@ public:
                                const std::string& titulo,
                                const std::string& autor, int ano);
 
+    std::string cadastrarUsuario(const std::string& cpf,
+                                 const std::string& nome);
+
 private:
     std::map<std::string, Livro> livros;
+    std::map<std::string, Usuario> usuarios;
 };
 
 #endif

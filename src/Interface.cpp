@@ -53,9 +53,24 @@ static void opcaoCadastrarLivro(Biblioteca& biblioteca) {
               << std::endl;
 }
 
+static void opcaoCadastrarUsuario(Biblioteca& biblioteca) {
+    std::string cpf;
+    std::string nome;
+
+    std::cout << "CPF: ";
+    std::cin >> cpf;
+
+    std::cout << "Nome: ";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::getline(std::cin, nome);
+
+    std::cout << biblioteca.cadastrarUsuario(cpf, nome) << std::endl;
+}
+
 void executar(Biblioteca& biblioteca) {
     while (true) {
         std::cout << "1 - Cadastrar livro" << std::endl;
+        std::cout << "2 - Cadastrar usuario" << std::endl;
         std::cout << "0 - Sair" << std::endl;
         std::cout << "Escolha uma opcao: ";
 
@@ -76,6 +91,11 @@ void executar(Biblioteca& biblioteca) {
 
         if (opcao == 1) {
             opcaoCadastrarLivro(biblioteca);
+            if (!perguntarMaisAcao()) {
+                return;
+            }
+        } else if (opcao == 2) {
+            opcaoCadastrarUsuario(biblioteca);
             if (!perguntarMaisAcao()) {
                 return;
             }

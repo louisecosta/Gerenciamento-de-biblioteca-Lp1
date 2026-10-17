@@ -47,3 +47,27 @@ std::string Biblioteca::cadastrarLivro(const std::string& codigoBarras,
     livros.insert(std::make_pair(codigoBarras, novo));
     return "Livro cadastrado com sucesso!";
 }
+
+static bool todosIguais(const std::string& texto) {
+    for (char c : texto) {
+        if (c != texto[0]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+std::string Biblioteca::cadastrarUsuario(const std::string& cpf,
+                                         const std::string& nome) {
+    if (cpf.size() != 11 || !todosDigitos(cpf) || todosIguais(cpf)) {
+        return "CPF invalido";
+    }
+
+    if (usuarios.find(cpf) != usuarios.end()) {
+        return "Cadastro ja existente";
+    }
+
+    Usuario novo(cpf, nome);
+    usuarios.insert(std::make_pair(cpf, novo));
+    return "Usuario cadastrado com sucesso!";
+}

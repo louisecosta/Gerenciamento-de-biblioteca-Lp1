@@ -19,6 +19,8 @@ public:
     void emprestarPara(const std::string& cpf);
     void devolver();
 
+    bool operator<(const Livro& outro) const;
+
 private:
     std::string codigoBarras;
     std::string numeroChamada;

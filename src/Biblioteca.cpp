@@ -1,7 +1,9 @@
 #include "Biblioteca.hpp"
 
+#include <algorithm>
 #include <list>
 #include <utility>
+#include <vector>
 
 static bool todosDigitos(const std::string& texto) {
     for (char c : texto) {
@@ -130,6 +132,19 @@ std::string Biblioteca::devolver(const std::string& codigoBarras) {
 
     itLivro->second.devolver();
     return "Livro devolvido com sucesso!";
+}
+
+std::vector<Livro> Biblioteca::livrosDisponiveis() const {
+    std::vector<Livro> disponiveis;
+    std::map<std::string, Livro>::const_iterator it = livros.begin();
+    while (it != livros.end()) {
+        if (it->second.estaDisponivel()) {
+            disponiveis.push_back(it->second);
+        }
+        ++it;
+    }
+    std::sort(disponiveis.begin(), disponiveis.end());
+    return disponiveis;
 }
 
 const Livro* Biblioteca::buscarLivro(const std::string& codigoBarras) const {

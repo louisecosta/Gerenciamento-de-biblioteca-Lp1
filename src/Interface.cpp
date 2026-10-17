@@ -3,6 +3,7 @@
 #include <iostream>
 #include <limits>
 #include <string>
+#include <vector>
 
 static bool perguntarMaisAcao() {
     std::string resposta;
@@ -89,12 +90,29 @@ static void opcaoRegistrarDevolucao(Biblioteca& biblioteca) {
     std::cout << biblioteca.devolver(codigoBarras) << std::endl;
 }
 
+static void opcaoListarLivros(Biblioteca& biblioteca) {
+    std::vector<Livro> disponiveis = biblioteca.livrosDisponiveis();
+
+    if (disponiveis.empty()) {
+        std::cout << "Nenhum livro disponivel" << std::endl;
+        return;
+    }
+
+    std::vector<Livro>::const_iterator it = disponiveis.begin();
+    while (it != disponiveis.end()) {
+        std::cout << it->getTitulo() << " - " << it->getAutor() << " - "
+                  << it->getCodigoBarras() << std::endl;
+        ++it;
+    }
+}
+
 void executar(Biblioteca& biblioteca) {
     while (true) {
         std::cout << "1 - Cadastrar livro" << std::endl;
         std::cout << "2 - Cadastrar usuario" << std::endl;
         std::cout << "3 - Registrar emprestimo" << std::endl;
         std::cout << "4 - Registrar devolucao" << std::endl;
+        std::cout << "5 - Listar livros disponiveis" << std::endl;
         std::cout << "0 - Sair" << std::endl;
         std::cout << "Escolha uma opcao: ";
 
@@ -130,6 +148,11 @@ void executar(Biblioteca& biblioteca) {
             }
         } else if (opcao == 4) {
             opcaoRegistrarDevolucao(biblioteca);
+            if (!perguntarMaisAcao()) {
+                return;
+            }
+        } else if (opcao == 5) {
+            opcaoListarLivros(biblioteca);
             if (!perguntarMaisAcao()) {
                 return;
             }

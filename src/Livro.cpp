@@ -41,3 +41,7 @@ void Livro::emprestarPara(const std::string& cpf) {
 void Livro::devolver() {
     cpfMutuario = "";
 }
+
+bool Livro::operator<(const Livro& outro) const {
+    return titulo < outro.titulo;
+}

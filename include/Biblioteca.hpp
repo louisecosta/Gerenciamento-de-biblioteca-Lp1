@@ -3,6 +3,7 @@
 
 #include <map>
 #include <string>
+#include <vector>
 
 #include "Livro.hpp"
 #include "Usuario.hpp"
@@ -21,6 +22,8 @@ public:
                           const std::string& codigoBarras);
 
     std::string devolver(const std::string& codigoBarras);
+
+    std::vector<Livro> livrosDisponiveis() const;
 
     const Livro* buscarLivro(const std::string& codigoBarras) const;
     const Usuario* buscarUsuario(const std::string& cpf) const;

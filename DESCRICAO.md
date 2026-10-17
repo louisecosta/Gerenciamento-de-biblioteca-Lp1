@@ -86,10 +86,15 @@
 ## Exemplo de uso
 
 > Escolha uma opcao: 1
+>
 > Codigo de barras: 2025001523
+>
 > Numero de chamada: 13245
+>
 > Titulo: O Hobbit
+>
 > Autor: Tolkien
+>
 > Ano: 1937
 >
 > Livro cadastrado com sucesso!
@@ -97,6 +102,7 @@
 > Escolha uma opcao: 3
 >
 > Digite o CPF do usuário: 52134542565
+>
 > Codigo de barras do livro: 2025001523
 >
 > OK: Emprestimo realizado. O Hobbit agora esta com Maria.
